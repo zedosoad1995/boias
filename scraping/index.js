@@ -8,8 +8,6 @@ const categories = {
   temperature: 4,
 };
 
-const cols = ["SDATA", "HMAX", "HS", "TZ", "TP", "THTP", "TEMP"];
-
 const NaNToUndefined = (rows) => {
   return rows.map((row) =>
     Object.fromEntries(Object.entries(row).map(([k, v]) => [k, v === "NaN" ? null : v]))
@@ -21,10 +19,14 @@ const updateData = (existingRows, newRows) => {
 
   for (const newRow of newRows) {
     const idx = returnRows.findIndex((row) => row.SDATA === newRow.SDATA);
-    if (idx === -1) continue;
-
-    returnRows[idx] = newRow;
+    if (idx === -1) {
+      returnRows.push(newRow);
+    } else {
+      returnRows[idx] = newRow;
+    }
   }
+
+  returnRows.sort();
 
   return returnRows;
 };
