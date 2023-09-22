@@ -17,7 +17,7 @@ jobs:
       - name: Set up environment
         run: |
           echo 'JSON_KEY="${{ secrets.JSON_KEY }}"' > scraping/.env
-          echo 'ANOTHER_KEY="${{ secrets.BIN_ID }}"' >> scraping/.env
+          echo 'BIN_ID="${{ secrets.BIN_ID }}"' >> scraping/.env
 
       - name: Debugging - Show .env
         run: cat scraping/.env
