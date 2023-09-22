@@ -15,7 +15,9 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Set up environment
-        run: echo "${{ secrets.ENV_FILE }}" > scraping/.env
+        run: |
+          echo 'JSON_KEY="${{ secrets.JSON_KEY }}"' > scraping/.env
+          echo 'ANOTHER_KEY="${{ secrets.BIN_ID }}"' >> scraping/.env
 
       - name: Debugging - Show .env
         run: cat scraping/.env
