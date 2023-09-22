@@ -3,7 +3,7 @@ name: Scrape
 on:
   workflow_dispatch: # Manual trigger
   schedule:
-    - cron: "*/30 * * * *"
+    - cron: "1 * * * *"
 
 jobs:
   build:
