@@ -1,9 +1,9 @@
-name: Run Node.js Script
+name: Scrape
 
 on:
   workflow_dispatch: # Manual trigger
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "*/30 * * * *"
 
 jobs:
   build:
