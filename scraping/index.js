@@ -30,6 +30,7 @@ const updateData = (existingRows, newRows) => {
 };
 
 const get_buoys_data = async () => {
+  console.log(process.env.BIN_ID, process.env.JSON_KEY);
   return await axios
     .get(`https://api.jsonbin.io/v3/b/${process.env.BIN_ID}`, {
       headers: {
