@@ -3,7 +3,7 @@ name: Run Node.js Script
 on:
   workflow_dispatch: # Manual trigger
   schedule:
-    - cron: "0 21 * * *"
+    - cron: "*/5 * * * *"
 
 jobs:
   build:
@@ -16,6 +16,9 @@ jobs:
 
       - name: Set up environment
         run: echo "${{ secrets.ENV_FILE }}" > scraping/.env
+
+      - name: Debugging - Show .env
+        run: cat scraping/.env
 
       - name: Use Node.js
         uses: actions/setup-node@v2
