@@ -1,7 +1,7 @@
 const axios = require("axios");
 require("dotenv").config();
 
-const characteristic = {
+const categories = {
   height: 1,
   period: 2,
   direction: 3,
@@ -29,7 +29,7 @@ const updateData = (existingRows, newRows) => {
   return returnRows;
 };
 
-const get_buoys_data = async () => {
+const getBuoysData = async () => {
   return await axios
     .get(`https://api.jsonbin.io/v3/b/${process.env.BIN_ID}`, {
       headers: {
@@ -39,14 +39,14 @@ const get_buoys_data = async () => {
     .then(({ data }) => data.record);
 };
 
-const scrape_buoys_data = async () => {
+const scrapeBuoysData = async () => {
   try {
-    var existingData = await get_buoys_data();
+    var existingData = await getBuoysData();
   } catch (_) {
     var existingData = {};
   }
 
-  for (const [key, val] of Object.entries(characteristic)) {
+  for (const [key, val] of Object.entries(categories)) {
     const path = `https://www.hidrografico.pt/json/boia.graph.php?id_est=1005&id_eqp=1009&gmt=GMT&dtz=Europe/Lisbon&dbn=monican&par=${val}&per=3`;
     let { data } = await axios.get(path);
 
@@ -68,4 +68,4 @@ const scrape_buoys_data = async () => {
     .catch(console.error);
 };
 
-scrape_buoys_data();
+scrapeBuoysData();
