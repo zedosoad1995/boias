@@ -11,7 +11,7 @@ import {
   Legend,
 } from "chart.js";
 import { getBuoysData } from "./Services";
-import { downloadExcel, filterByDate, subsample } from "./Utils";
+import { downloadExcel, downloadSelectedExcel, filterByDate, subsample } from "./Utils";
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
@@ -97,6 +97,10 @@ function App() {
   }, []);
 
   const handleDownload = () => {
+    downloadSelectedExcel(filterByDate(rows[category], range));
+  };
+
+  const handleDownloadAll = () => {
     downloadExcel([
       { sheetName: "height", data: rows.height },
       { sheetName: "period", data: rows.period },
@@ -123,6 +127,7 @@ function App() {
           <option value="total">Total</option>
         </select>
         <button onClick={handleDownload}>Download</button>
+        <button onClick={handleDownloadAll}>Download Tudo</button>
       </div>
       {isLoading && <div style={{ marginTop: 8 }}>A carregar...</div>}
       {!isLoading && (

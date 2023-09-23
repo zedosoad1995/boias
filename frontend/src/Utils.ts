@@ -21,6 +21,19 @@ export const downloadExcel = (multiData: DataObject[]) => {
   saveAs(blob, "boias-do-algarve.xlsx");
 };
 
+export const downloadSelectedExcel = (data: any[]) => {
+  const wb: XLSX.WorkBook = XLSX.utils.book_new();
+
+  const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data);
+  XLSX.utils.book_append_sheet(wb, ws, "Pág. 1");
+
+  const excelBuffer: any = XLSX.write(wb, { bookType: "xlsx", type: "array" });
+  const blob: Blob = new Blob([excelBuffer], {
+    type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8",
+  });
+  saveAs(blob, "boias-do-algarve.xlsx");
+};
+
 export const subsample = <T = any>(data: T[], maxSize = 100) => {
   const sampleFactor = Math.ceil(data.length / maxSize);
 
